@@ -1,0 +1,18 @@
+[
+    {
+        "nome": "Testee",
+        "n\u00famero_de_telefone": "12313223",
+        "tipo": "Celular",
+        "imei/serial_number": "45645465",
+        "fun\u00e7\u00e3o": "78978798",
+        "setor": "ENTREGA"
+    },
+    {
+        "nome": "",
+        "n\u00famero_de_telefone": "",
+        "tipo": "Celular",
+        "imei/serial_number": "",
+        "fun\u00e7\u00e3o": "",
+        "setor": "ENTREGA"
+    }
+]
