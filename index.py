@@ -45,12 +45,12 @@ class Application:
         setor_menu.config(font=("Calibri", 10), bg="#f0f0f0", bd=2, relief="solid")
         setor_menu.grid(row=len(labels_texts) + 1, column=1, sticky="ew", padx=10, pady=(5, 10))
 
-        # Botões para salvar e pesquisar
+        # Botões para salvar e buscar por setor
         self.salvar = Button(self.widget1, text="Salvar", font=("Calibri", 10), bd=2, relief="raised", command=self.salvar_informacoes)
         self.salvar.grid(row=len(labels_texts) + 2, column=0, padx=10, pady=10)
 
-        self.pesquisar = Button(self.widget1, text="Pesquisar", font=("Calibri", 10), bd=2, relief="raised", command=self.pesquisar_informacoes)
-        self.pesquisar.grid(row=len(labels_texts) + 2, column=1, padx=10, pady=10)
+        self.buscar_por_setor = Button(self.widget1, text="Buscar por Setor", font=("Calibri", 10), bd=2, relief="raised", command=self.buscar_por_setor)
+        self.buscar_por_setor.grid(row=len(labels_texts) + 2, column=1, padx=10, pady=10)
 
         # Tabela de preenchimento
         self.tree = ttk.Treeview(self.master)
@@ -105,28 +105,6 @@ class Application:
         print("Salvo com sucesso!")
         self.mostrar_mensagem("Salvo com sucesso!")
         self.carregar_dados()
-
-    def pesquisar_informacoes(self):
-        nome_pesquisado = self.entries["Nome:"].get().strip().lower()  # Obtém o nome pesquisado do campo de entrada e remove espaços em branco
-        setor = self.setor_var.get()
-        arquivo = f"{setor.lower().replace(' ', '_')}.json"
-
-        if os.path.exists(arquivo):
-            with open(arquivo, "r") as f:
-                dados = json.load(f)
-            if isinstance(dados, list):
-                encontrado = False
-                for pessoa in dados:
-                    if pessoa["nome"].strip().lower() == nome_pesquisado:
-                        for i, text in enumerate(self.entries):
-                            self.entries[text].delete(0, tk.END)
-                            self.entries[text].insert(0, pessoa.get(text[:-1].lower().replace(" ", "_"), ""))
-                        encontrado = True
-                        break
-                if not encontrado:
-                    self.mostrar_mensagem("Nome não encontrado.")
-        else:
-            self.mostrar_mensagem("Nenhum dado encontrado.")
 
     def buscar_por_setor(self):
         setor_selecionado = self.setor_var.get()
